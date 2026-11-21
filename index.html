@@ -347,7 +347,7 @@ body{
     <li>每位顾客每天可抽 1 次，点击中间按钮开始抽奖。</li>
     <li>奖品：北新堵漏王（一包）、胶粉（一包）、10 元 / 20 元 / 50 元现金抵扣券。</li>
     <li>凭截图下次消费到店领取，堵漏王可当天领取。</li>
-    <li>每单仅可兑用一张，不可叠加，不找零、不折现。</li>
+    <li>所有奖券每次消费限用一张，不可叠加，不找零、不折现。</li>
     <li>现金抵扣券下次消费使用，余额累计在个人账户，永久有效。</li>
   </section>
 
@@ -385,7 +385,7 @@ body{
     <div class="hr"></div>
     <div class="note">
       <span>兑换说明</span>
-      <div id="prizeNote">· 凭截图下次消费领取（堵漏王可当天领取）<br>· 奖品每单消费仅可兑用一张，不支持折现</div>
+      <div id="prizeNote">· 凭截图下次消费领取（堵漏王可当天领取）<br>· 所有奖券每次消费限用一张，不支持折现</div>
     </div>
     <button class="btn" id="okBtn">开心收下</button>
     <div class="mini">截图保存 · 下次到店领取</div>
@@ -570,7 +570,7 @@ body{
     document.getElementById('prizeUnit').textContent = win.unit || (win.cash ? '现金抵扣券' : '');
     document.getElementById('prizeNote').innerHTML = win.cash
       ? '· 现金抵扣券下次消费使用，每次兑换一张<br>· 未用完金额累计在个人账户，永久有效'
-      : '· 凭截图下次消费领取（堵漏王可当天领取）<br>· 奖品每单消费仅可兑用一张，不支持折现';
+      : '· 凭截图下次消费领取（堵漏王可当天领取）<br>· 所有奖券每次消费限用一张，不支持折现';
     mask.classList.add('show');
     confetti();
   }
