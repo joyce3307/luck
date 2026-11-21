@@ -534,6 +534,33 @@ body{
       setTimeout(function(){ showResult(record); }, 240);
     }
 
+    /* 优先用浏览器原生动画（GPU 渲染，任何手机都能看到转动过程）；
+       不支持时退回逐帧计算 */
+    if(typeof wheelEl.animate === 'function'){
+      try{
+        var anim = wheelEl.animate(
+          [ { transform:'rotate('+startRot+'deg)' },
+            { transform:'rotate('+(startRot+delta)+'deg)' } ],
+          { duration:dur, easing:'cubic-bezier(.16,.62,.2,1)', fill:'forwards' }
+        );
+        anim.onfinish = function(){
+          rotation = startRot + delta;
+          try{ anim.cancel(); }catch(e){}
+          wheelEl.style.transform = 'rotate(' + rotation + 'deg)';
+          finish();
+        };
+        /* 兜底：动画异常结束也要结算 */
+        setTimeout(function(){
+          if(spinning){
+            rotation = startRot + delta;
+            wheelEl.style.transform = 'rotate(' + rotation + 'deg)';
+            finish();
+          }
+        }, dur + 500);
+        return;
+      }catch(e){ /* 落到逐帧方案 */ }
+    }
+
     requestAnimationFrame(frame);
     setTimeout(function(){ if(spinning){ rotation = startRot + delta; wheelEl.style.transform='rotate('+rotation+'deg)'; finish(); } }, dur + 400);
   }
