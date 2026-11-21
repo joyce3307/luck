@@ -177,7 +177,13 @@ body{
 .acct .balance{font-family:"Songti SC","STSong",serif;font-weight:800;font-size:27px;color:#ffe4a6;line-height:1}
 .acct .balance small{font-size:12px;font-weight:600;margin-left:2px;color:#f3d18a}
 .acct .balance-note{font-size:10.5px;color:rgba(255,243,226,.45);margin-top:5px;letter-spacing:.06em}
-.acct .list{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acct .acc-title{
+  margin-top:12px;padding-top:10px;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(243,209,138,.22);
+}
+.acct .acc-title span{font-size:12.5px;color:#ffd998;letter-spacing:.12em;font-weight:700}
+.acct .acc-title em{font-style:normal;font-size:10px;color:rgba(255,243,226,.4);letter-spacing:.06em}
+.acct .list{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .vitem{border-radius:9px;padding:10px 8px;background:rgba(0,0,0,.22);position:relative;
   border:1px solid rgba(243,209,138,.18);min-height:46px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer}
@@ -265,8 +271,6 @@ body{
   background:linear-gradient(90deg,transparent,rgba(150,105,45,.4),transparent)}
 .note{font-size:11.5px;color:#8a6a3f;line-height:1.95;text-align:left;padding:0 2px}
 .note span{display:block;color:#a5441a;font-weight:600;letter-spacing:.08em;margin-bottom:4px}
-  background:linear-gradient(180deg,rgba(214,58,46,.1),rgba(214,58,46,.04));
-  border:1px dashed rgba(168,52,36,.45)}
 .qr{display:inline-block;background:#fff;padding:8px;border-radius:10px;line-height:0;
   box-shadow:0 3px 10px rgba(0,0,0,.15)}
 .qr table{border-collapse:collapse;margin:0 auto;background:#fff}
@@ -280,13 +284,6 @@ body{
 }
 .btn:active{transform:translateY(1px)}
 .mini{margin-top:9px;font-size:10.5px;color:#a08a63;letter-spacing:.06em}
-
-/* 核销输入 */
-  width:100%;margin:12px 0 4px;height:46px;border-radius:10px;
-  border:1px solid rgba(168,90,40,.35);background:#fffdf7;
-  text-align:center;font-size:22px;letter-spacing:.22em;text-transform:uppercase;
-  font-family:inherit;color:#8f1d16;outline:none;-webkit-appearance:none;
-}
 
 /* ===== 满屏彩带 ===== */
 .fx{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden}
@@ -362,8 +359,8 @@ body{
         <div class="balance-note">现金累计获得 · 每次消费仅可用一张</div>
       </div>
     </div>
+    <div class="acc-title"><span>中奖记录</span><em>最近 6 次 · 自动保存</em></div>
     <div class="list" id="accList"></div>
-    <div class="more">最近 6 次中奖记录，自动保存</div>
   </section>
 
   <div class="foot">
