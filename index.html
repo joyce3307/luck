@@ -116,6 +116,7 @@ body{
   transform-origin:50% 50%;
 }
 .sector-label.small{font-size:11px}
+.sector-label.tiny{font-size:9.5px;width:88px;letter-spacing:.02em}
 .sector-label.mid{font-size:15px}
 .sector-label .sub{display:block;font-size:9.5px;font-weight:500;margin-top:1px;opacity:.9}
 .on-red{color:#fff5de;text-shadow:0 1px 1px rgba(90,10,8,.5)}
@@ -324,16 +325,16 @@ body{
     <div class="ring"></div>
     <div class="wheel" id="wheel">
       <div class="spokes"></div>
-      <div class="sector-label small on-red"   style="transform:translate(-50%,-50%) rotate(0deg)   translateY(-105px)">北新堵漏王</div>
-      <div class="sector-label mid   on-cream" style="transform:translate(-50%,-50%) rotate(36deg)  translateY(-105px)">10元</div>
-      <div class="sector-label small on-red"   style="transform:translate(-50%,-50%) rotate(72deg)  translateY(-105px)">北新堵漏王</div>
-      <div class="sector-label mid   on-cream" style="transform:translate(-50%,-50%) rotate(108deg) translateY(-105px) rotate(180deg)"><span class="sub">（一包）</span>胶粉</div>
-      <div class="sector-label small on-red"   style="transform:translate(-50%,-50%) rotate(144deg) translateY(-105px) rotate(180deg)">北新堵漏王</div>
-      <div class="sector-label mid   on-cream" style="transform:translate(-50%,-50%) rotate(180deg) translateY(-105px) rotate(180deg)">20元</div>
-      <div class="sector-label small on-red"   style="transform:translate(-50%,-50%) rotate(216deg) translateY(-105px) rotate(180deg)">北新堵漏王</div>
-      <div class="sector-label mid   on-cream" style="transform:translate(-50%,-50%) rotate(252deg) translateY(-105px) rotate(180deg)"><span class="sub">（一包）</span>胶粉</div>
-      <div class="sector-label small on-red"   style="transform:translate(-50%,-50%) rotate(288deg) translateY(-105px)">北新堵漏王</div>
-      <div class="sector-label mid   on-cream" style="transform:translate(-50%,-50%) rotate(324deg) translateY(-105px)">50元</div>
+      <div class="sector-label tiny on-red" style="transform:translate(-50%,-50%) rotate(0deg) translateY(-105px)">北新堵漏王</div>
+      <div class="sector-label small on-cream" style="transform:translate(-50%,-50%) rotate(36deg) translateY(-105px)">5元</div>
+      <div class="sector-label tiny on-red" style="transform:translate(-50%,-50%) rotate(72deg) translateY(-105px)">大禹墙固</div>
+      <div class="sector-label tiny on-cream" style="transform:translate(-50%,-50%) rotate(108deg) translateY(-105px) rotate(180deg)">801胶粉</div>
+      <div class="sector-label tiny on-red" style="transform:translate(-50%,-50%) rotate(144deg) translateY(-105px) rotate(180deg)">普通非固化</div>
+      <div class="sector-label small on-cream" style="transform:translate(-50%,-50%) rotate(180deg) translateY(-105px) rotate(180deg)">10元</div>
+      <div class="sector-label tiny on-red" style="transform:translate(-50%,-50%) rotate(216deg) translateY(-105px) rotate(180deg)">北新双组份<span class="sub">背胶</span></div>
+      <div class="sector-label tiny on-cream" style="transform:translate(-50%,-50%) rotate(252deg) translateY(-105px) rotate(180deg)">北新单组份<span class="sub">背胶</span></div>
+      <div class="sector-label small on-red" style="transform:translate(-50%,-50%) rotate(288deg) translateY(-105px)">20元</div>
+      <div class="sector-label small on-cream" style="transform:translate(-50%,-50%) rotate(324deg) translateY(-105px)">50元</div>
     </div>
     <div class="pointer"></div>
     <button class="spin-btn" id="spinBtn"><b>抽奖</b><u>点击抽一次</u></button>
@@ -345,7 +346,7 @@ body{
   <section class="rules">
     <h3>活动说明</h3>
     <li>每位顾客每天可抽 1 次，点击中间按钮开始抽奖。</li>
-    <li>奖品：北新堵漏王（一包）、胶粉（一包）、10 元 / 20 元 / 50 元现金抵扣券。</li>
+    <li>奖项：北新堵漏王（一包）、801 胶粉（一包）、大禹墙固、普通非固化、北新双组份背胶、北新单组份背胶，以及 5 元 / 10 元 / 20 元 / 50 元现金抵扣券。</li>
     <li>凭截图下次消费到店领取，堵漏王可当天领取。</li>
     <li>所有奖券每次消费限用一张，不可叠加，不找零、不折现。</li>
     <li>现金抵扣券下次消费使用，余额累计在个人账户，永久有效。</li>
@@ -395,19 +396,24 @@ body{
 <script>
 
 (function(){
+  /* 权重单位=百分比；合计 100.000 */
   var PRIZES = {
-    seal: { name:'北新堵漏王', unit:'一包', cash:false, w:88, amt:0  },
-    glue: { name:'胶粉',       unit:'一包', cash:false, w:10, amt:0  },
-    c10:  { name:'10元现金抵扣券', unit:'',     cash:true,  w:1,  amt:10 },
-    c20:  { name:'20元现金抵扣券', unit:'',     cash:true,  w:1,  amt:20 },
-    c50:  { name:'50元现金抵扣券', unit:'',     cash:true,  w:0,  amt:50 }
+    seal:    { name:'北新堵漏王',       unit:'一包', cash:false, w:84.495, amt:0  },
+    c5:      { name:'5元现金抵扣券',   unit:'',     cash:true,  w:1,      amt:5  },
+    qianggu: { name:'大禹墙固',         unit:'',     cash:false, w:1,      amt:0  },
+    glue801: { name:'801胶粉',          unit:'一包', cash:false, w:10,     amt:0  },
+    fgh:     { name:'普通非固化',       unit:'',     cash:false, w:0.5,    amt:0  },
+    c10:     { name:'10元现金抵扣券',   unit:'',     cash:true,  w:1,      amt:10 },
+    sbf:     { name:'北新双组份背胶',   unit:'',     cash:false, w:1,      amt:0  },
+    dbf:     { name:'北新单组份背胶',   unit:'',     cash:false, w:1,      amt:0  },
+    c20:     { name:'20元现金抵扣券',   unit:'',     cash:true,  w:0.005,  amt:20 },
+    c50:     { name:'50元现金抵扣券',   unit:'',     cash:true,  w:0,      amt:50 }
   };
-  var SECTORS = ['seal','c10','seal','glue','seal','c20','seal','glue','seal','c50']
+  var SECTORS = ['seal','c5','qianggu','glue801','fgh','c10','sbf','dbf','c20','c50']
     .map(function(k){ return { prize:k }; });
   var N = SECTORS.length;
   var STORE_KEY = 'wp_lottery_record_v1';
   var ACC_KEY   = 'wp_lottery_account_v1';
-  var KEY50     = 'wp_lottery_50day';
   var MAX_ACC   = 6;
 
   var wheelEl = document.getElementById('wheel');
@@ -483,11 +489,7 @@ body{
     }).join('');
   }
 
-  function check50(){
-    var last=null; try{ last=localStorage.getItem(KEY50); }catch(e){}
-    if(!last){ try{ localStorage.setItem(KEY50, todayKey()); }catch(e){} return false; }
-    return daysBetween(todayKey(), last) >= 50;
-  }
+
 
   /* ===== 逐帧旋转 ===== */
   function spin(){
@@ -498,7 +500,7 @@ body{
     btn.querySelector('u').textContent = '好运正在加载';
     if(navigator.vibrate) navigator.vibrate(12);
 
-    var idx = check50() ? sectorOf('c50') : pickSector();
+    var idx = pickSector();
     var segDeg = 360 / N;
     var jitter = (Math.random()-0.5) * segDeg * 0.5;
     var targetDeg = ((360 - idx*segDeg) % 360 + 360) % 360;
@@ -524,7 +526,6 @@ body{
       if(navigator.vibrate) navigator.vibrate([18,60,26]);
       var key = SECTORS[idx].prize;
       var pz = PRIZES[key];
-      if(key === 'c50'){ try{ localStorage.setItem(KEY50, todayKey()); }catch(e){} }
       record = { name:pz.name, unit:pz.unit, cash:pz.cash, amount:pz.amt||0, date:todayKey(), time:Date.now() };
       try{ localStorage.setItem(STORE_KEY, JSON.stringify(record)); }catch(e){}
       addAcc(record);
