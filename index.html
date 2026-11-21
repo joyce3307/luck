@@ -453,21 +453,9 @@ body{
     try{ localStorage.setItem(ACC_KEY, JSON.stringify(list)); }catch(e){}
   }
   function addAcc(rec){
-    var list = getAcc();
-    /* 同一奖项合并为一条，用 count 记录次数；最多保留 MAX_ACC 条不同奖项 */
-    var hit = -1;
-    for(var i=0;i<list.length;i++){
-      if(list[i].name === rec.name && (list[i].unit||'') === (rec.unit||'')){ hit = i; break; }
-    }
-    if(hit >= 0){
-      var g = list[hit];
-      g.count = (g.count || 1) + 1;
-      g.day = rec.date;
-      list.splice(hit,1); list.unshift(g);
-    }else{
-      list.unshift({ day:rec.date, name:rec.name, unit:rec.unit||'', cash:!!rec.cash,
-                     amount:rec.amount||0, count:1 });
-    }
+    var list = getAcc().filter(function(x){ return x.day !== rec.date; });
+    /* 只保留最近 6 次中奖，最新的在最前，满 6 次后最早的一条被覆盖 */
+    list.unshift({ day:rec.date, name:rec.name, unit:rec.unit||'', cash:!!rec.cash, amount:rec.amount||0 });
     while(list.length > MAX_ACC) list.pop();
     saveAcc(list);
     renderAcc();
@@ -481,7 +469,7 @@ body{
       saveAcc(list);
     }
     var total = 0;
-    list.forEach(function(x){ total += (x.amount||0) * (x.count||1); });
+    list.forEach(function(x){ total += (x.amount||0); });
     var bal = document.getElementById('accBalance');
     if(bal) bal.textContent = total;
     var box = document.getElementById('accList');
@@ -494,7 +482,7 @@ body{
     var groups = [], map = {};
     list.forEach(function(x){
       var key = (x.name||'奖品') + '|' + (x.unit||'');
-      var c = x.count || 1;
+      var c = 1;
       if(map[key]){ map[key].n += c; }
       else{ var g = { name:x.name||'奖品', unit:x.unit||'', n:c }; map[key] = g; groups.push(g); }
     });
