@@ -385,8 +385,8 @@ body{
     <div class="prize-unit" id="prizeUnit">一包</div>
     <div class="hr"></div>
     <div class="note">
-      <span>兑换说明</span>
-      <div id="prizeNote">· 凭截图下次消费领取（堵漏王可当天领取）<br>· 现金抵扣券不累计，每次消费只用一张，不支持折现</div>
+      <span>中奖说明</span>
+      <div id="prizeNote">· 堵漏王奖品当日消费即可领取<br>· 中奖记录仅保留 6 次，请及时使用</div>
     </div>
     <button class="btn" id="okBtn">开心收下</button>
     <div class="mini">截图保存 · 下次到店领取</div>
@@ -569,9 +569,12 @@ body{
   function showResult(win){
     document.getElementById('prizeName').textContent = win.name;
     document.getElementById('prizeUnit').textContent = win.unit || (win.cash ? '现金抵扣券' : '');
+    var isSeal = (win.name || '').indexOf('堵漏王') >= 0;
     document.getElementById('prizeNote').innerHTML = win.cash
-      ? '· 现金抵扣券下次消费使用，每次兑换一张<br>· 未用完金额累计在个人账户，永久有效'
-      : '· 凭截图下次消费领取（堵漏王可当天领取）<br>· 现金抵扣券不累计，每次消费只用一张，不支持折现';
+      ? '· 现金抵扣券下次消费使用<br>· 不累计，每次消费限用一张，不可折现'
+      : (isSeal
+          ? '· 堵漏王奖品当日消费即可领取<br>· 中奖记录仅保留 6 次，请及时使用'
+          : '· 奖品凭中奖页面下次消费领取<br>· 中奖记录仅保留 6 次，请及时使用');
     mask.classList.add('show');
     confetti();
   }
