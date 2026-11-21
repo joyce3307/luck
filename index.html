@@ -348,7 +348,7 @@ body{
     <li>每位顾客每天可抽 1 次，点击中间按钮开始抽奖。</li>
     <li>奖项：北新堵漏王（一包）、801 胶粉（一包）、大禹墙固、普通非固化、北新双组份背胶、北新单组份背胶，以及 5 元 / 10 元 / 20 元 / 50 元现金抵扣券。</li>
     <li>凭截图下次消费到店领取，堵漏王可当天领取。</li>
-    <li>所有奖券每次消费限用一张，不可叠加，不找零、不折现。</li>
+    <li>现金抵扣券不累计使用，每次消费只用一张，不可叠加、不找零、不折现。</li>
     <li>现金抵扣券下次消费使用，余额累计在个人账户，永久有效。</li>
   </section>
 
@@ -361,7 +361,7 @@ body{
       <div>
         <div class="lb">我的中奖账户</div>
         <div class="balance"><span id="accBalance">0</span><small>元</small></div>
-        <div class="balance-note">现金现金抵扣券余额 · 永久有效</div>
+        <div class="balance-note">现金累计获得 · 每次消费限用一张</div>
       </div>
     </div>
     <div class="list" id="accList"></div>
@@ -386,7 +386,7 @@ body{
     <div class="hr"></div>
     <div class="note">
       <span>兑换说明</span>
-      <div id="prizeNote">· 凭截图下次消费领取（堵漏王可当天领取）<br>· 所有奖券每次消费限用一张，不支持折现</div>
+      <div id="prizeNote">· 凭截图下次消费领取（堵漏王可当天领取）<br>· 现金抵扣券不累计，每次消费只用一张，不支持折现</div>
     </div>
     <button class="btn" id="okBtn">开心收下</button>
     <div class="mini">截图保存 · 下次到店领取</div>
@@ -398,15 +398,15 @@ body{
 (function(){
   /* 权重单位=百分比；合计 100.000 */
   var PRIZES = {
-    seal:    { name:'北新堵漏王',       unit:'一包', cash:false, w:84.495, amt:0  },
-    c5:      { name:'5元现金抵扣券',   unit:'',     cash:true,  w:1,      amt:5  },
+    seal:    { name:'北新堵漏王',       unit:'一包', cash:false, w:60.5,  amt:0  },
+    c5:      { name:'5元现金抵扣券',   unit:'',     cash:true,  w:10,     amt:5  },
     qianggu: { name:'大禹墙固',         unit:'',     cash:false, w:1,      amt:0  },
-    glue801: { name:'801胶粉',          unit:'一包', cash:false, w:10,     amt:0  },
+    glue801: { name:'801胶粉',          unit:'一包', cash:false, w:20,     amt:0  },
     fgh:     { name:'普通非固化',       unit:'',     cash:false, w:0.5,    amt:0  },
-    c10:     { name:'10元现金抵扣券',   unit:'',     cash:true,  w:1,      amt:10 },
+    c10:     { name:'10元现金抵扣券',   unit:'',     cash:true,  w:5,      amt:10 },
     sbf:     { name:'北新双组份背胶',   unit:'',     cash:false, w:1,      amt:0  },
     dbf:     { name:'北新单组份背胶',   unit:'',     cash:false, w:1,      amt:0  },
-    c20:     { name:'20元现金抵扣券',   unit:'',     cash:true,  w:0.005,  amt:20 },
+    c20:     { name:'20元现金抵扣券',   unit:'',     cash:true,  w:1,      amt:20 },
     c50:     { name:'50元现金抵扣券',   unit:'',     cash:true,  w:0,      amt:50 }
   };
   var SECTORS = ['seal','c5','qianggu','glue801','fgh','c10','sbf','dbf','c20','c50']
@@ -571,7 +571,7 @@ body{
     document.getElementById('prizeUnit').textContent = win.unit || (win.cash ? '现金抵扣券' : '');
     document.getElementById('prizeNote').innerHTML = win.cash
       ? '· 现金抵扣券下次消费使用，每次兑换一张<br>· 未用完金额累计在个人账户，永久有效'
-      : '· 凭截图下次消费领取（堵漏王可当天领取）<br>· 所有奖券每次消费限用一张，不支持折现';
+      : '· 凭截图下次消费领取（堵漏王可当天领取）<br>· 现金抵扣券不累计，每次消费只用一张，不支持折现';
     mask.classList.add('show');
     confetti();
   }
